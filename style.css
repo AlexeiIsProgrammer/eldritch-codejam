@@ -1,0 +1,148 @@
+body {
+    background-image: url("./assets/home.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.drevni {
+    width: 300px;
+    height: 400px;
+    transition: all ease-in-out 0.3s;
+}
+
+.drevni:hover {
+    box-shadow: rgb(77, 77, 77) 0px 0px 7px 8px;
+}
+
+.drevniContainer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.currentDrevni {
+    box-shadow: white 0px 0px 3px 4px;
+}
+
+.levelContainer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: 15px;
+    visibility: hidden;
+    
+}
+
+.level {
+    width: 100px;
+    height: 30px;
+    
+    color: blanchedalmond;
+    text-align: center;
+    line-height: 30px;
+
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid blanchedalmond;
+
+    transition: all ease 0.5s;
+}
+
+.level:hover {
+    box-shadow: white 0px 0px 1px 2px;
+}
+
+.currentLevel {
+    box-shadow: white 0px 0px 3px 4px;
+}
+
+.tasovka {
+    visibility: hidden;
+
+    display: flex;
+    justify-content: center;
+}
+
+.tasovka div {
+    width: 100px;
+    height: 10px;
+
+    background-color: transparent;
+    border: solid 2px rgb(216, 240, 239);
+    color: rgb(216, 240, 239);
+    padding: 10px;
+    text-align: center;
+    line-height: 10px;
+    transition: all ease 0.5s;
+}
+
+.tasovka div:hover {
+    box-shadow: white 0px 0px 3px 2px;
+}
+
+/*------------*/
+
+.step {
+    color: beige;
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+}
+
+.green {
+    background-color: green;
+}
+
+.brown {
+    background-color: brown;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.stepContainer {
+    
+    display: flex;
+    flex-flow: nowrap row;
+    justify-content: center;
+
+}
+
+.stepContainer > div {
+    text-align: center;
+    line-height: 40px;
+
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+}
+
+.coloda {
+    display: flex;
+    flex-flow: nowrap row;
+    justify-content: center;
+}
+
+.shapka {
+    
+    margin: 5px;
+    width: 200px;
+    height: 300px;
+}
+
+.noreverse {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.reverse {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.randomWrapper {
+    visibility: hidden;
+}
+
