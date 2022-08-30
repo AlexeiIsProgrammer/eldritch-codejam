@@ -155,90 +155,132 @@ let greenCards;
 let brownCards;
 let blueCards;
 
+let fCheck = true;
+let sCheck = true;
+let tCheck = true;
+
 card.addEventListener("click", function () {
-    console.log("Call");
-    if(onFirstStep() === -1) {
-        console.log("КЛИК!");
-        if(onSecondStep() === -1) {
-            if(onThirdStep() === -1) {
-                card.style.backgroundImage = "none";
-                alert("Shuffled!");
-            }   
+    // if(fCheck) {
+    //     fCheck = onStep(firstStep);
+    //     console.log('1'+fCheck);
+    // }
+    // else if(sCheck) {
+    //     console.log('2'+fCheck);
+    //     sCheck = onStep(secondStep);
+    // } else if(tCheck) {
+    //     console.log('3'+sCheck);
+    //     tCheck = onStep(thirdStep);
+    // }
+    // else {
+    //     alert('shuffled');
+    //     fCheck = true;
+    //     sCheck = true;
+    //     tCheck = true;
+    // }
+
+    if(!onStep(firstStep)) {
+        console.log("secondComplete");
+        if(!onStep(secondStep)) {
+            console.log("thirdComplete");
+            if(!onStep(thirdStep)) {
+                console.log("thirdComplete");
+                alert('isShuffled');
+            }
         }
     }
-    else {
-        console.log("КЛИК!");
-    }
+    
 });
 
-function onFirstStep () {
-    greenCards = +firstStep.children[0].innerHTML;
-    brownCards = +firstStep.children[1].innerHTML;
-    blueCards = +firstStep.children[2].innerHTML;
+let isGreenFull = false,
+        isBrownFull = false,
+        isBlueFull = false;
 
-    if(greenCards !== 0) {
-        changeCard(greenArray[0].cardFace);
-        greenArray.shift()
-        firstStep.children[0].innerHTML = --greenCards;
-    } else if (brownCards !== 0) {
-        changeCard(brownArray[0].cardFace);
-        brownArray.shift()
-        firstStep.children[1].innerHTML = --brownCards;
-    } else if (blueCards !== 0) {
-        changeCard(blueArray[0].cardFace);
-        blueArray.shift()
-        firstStep.children[2].innerHTML = --blueCards;
-    } else {
-        return -1;
-    }
-    return 0;
+function generateRandomNum() {
+    return Math.floor(Math.random() * (4 - 1) + 1);
 }
 
-function onSecondStep () {
-    greenCards = +secondStep.children[0].innerHTML;
-    brownCards = +secondStep.children[1].innerHTML;
-    blueCards = +secondStep.children[2].innerHTML;
+function onStep (stepName) {
+    greenCards = +stepName.children[0].innerHTML;
+    brownCards = +stepName.children[1].innerHTML;
+    blueCards = +stepName.children[2].innerHTML;
+    
+    while (true) {
 
-    if(greenCards !== 0) {
-        changeCard(greenArray[0].cardFace);
-        greenArray.shift()
-        secondStep.children[0].innerHTML = --greenCards;
-    } else if (brownCards !== 0) {
-        changeCard(brownArray[0].cardFace);
-        brownArray.shift()
-        secondStep.children[1].innerHTML = --brownCards;
-    } else if (blueCards !== 0) {
-        changeCard(blueArray[0].cardFace);
-        blueArray.shift()
-        secondStep.children[2].innerHTML = --blueCards;
-    } else {
-        return -1;
+        if(isGreenFull === true && isBrownFull === true && isBlueFull === true)
+            break;
+
+        console.log(`${isBlueFull} ${isGreenFull} ${isBrownFull}`);
+        const random = generateRandomNum();
+
+        if(random === 1 && !isGreenFull) {
+            console.log("Call green");
+            if(colorIsGreen(stepName)){
+                return 1;
+            }
+            else {
+                isGreenFull = true;
+            }
+            
+            
+        }
+        else if(random === 2 && !isBrownFull){
+            console.log("Call brown"); 
+            if(colorIsBrown(stepName)){
+                return 1; 
+            } else {
+                isBrownFull = true;
+            }
+    
+        } else if(random === 3 && !isBlueFull){
+            console.log("Call blue");
+            if(colorIsBlue(stepName)){
+                return 1; 
+            } else {
+                isBlueFull = true;
+            }
+        } 
+        
     }
-    return 0;
+
+        isBlueFull = false;
+        isGreenFull = false;
+        isBrownFull = false;
+        console.log("All fulled");
+        return 0;
+
 }
 
-function onThirdStep () {
-    greenCards = +thirdStep.children[0].innerHTML;
-    brownCards = +thirdStep.children[1].innerHTML;
-    blueCards = +thirdStep.children[2].innerHTML;
-
+function colorIsGreen (stepName) {
     if(greenCards !== 0) {
         changeCard(greenArray[0].cardFace);
-        greenArray.shift()
-        thirdStep.children[0].innerHTML = --greenCards;
-    } else if (brownCards !== 0) {
-        changeCard(brownArray[0].cardFace);
-        brownArray.shift()
-        thirdStep.children[1].innerHTML = --brownCards;
-    } else if (blueCards !== 0) {
-        changeCard(blueArray[0].cardFace);
-        blueArray.shift()
-        thirdStep.children[2].innerHTML = --blueCards;
+        greenArray.shift();
+        stepName.children[0].innerHTML = --greenCards;
+        return true;
     } else {
-
-        return -1;
+        return false;
     }
-    return 0;
+}
+
+function colorIsBrown (stepName) {
+    if (brownCards !== 0) {
+        changeCard(brownArray[0].cardFace);
+        brownArray.shift();
+        stepName.children[1].innerHTML = --brownCards;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function colorIsBlue (stepName) {
+    if (blueCards !== 0) {
+        changeCard(blueArray[0].cardFace);
+        blueArray.shift();
+        stepName.children[2].innerHTML = --blueCards;
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function shuffle (array) {
